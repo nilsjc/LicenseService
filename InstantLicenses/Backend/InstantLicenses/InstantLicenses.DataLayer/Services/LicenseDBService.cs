@@ -1,41 +1,76 @@
 ﻿using InstantLicenses.Core.Interfaces;
-using InstantLicenses.Core.Models;
+using InstantLicenses.DataLayer.DbModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace InstantLicenses.DataLayer.Services
 {
-    public class LicenseDBService : ILicenseDBService, IDisposable
+    public class LicenseDBService : ILicenseDBService<License>, IDisposable
     {
-        private volatile bool disposed = false;
-        private readonly LicenseContext context;
+        private readonly License_Context context;
+        private bool disposedValue;
 
-        public Task<License> Get(string id)
+        public LicenseDBService()
         {
-            throw new NotImplementedException();
+            context = new License_Context();
         }
 
-        public Task<IEnumerable<License>> GetAll(int size, int page)
+        public async Task<License> Get(int id)
         {
-            throw new NotImplementedException();
+            return await context.Licenses
+                .FirstOrDefaultAsync(x => x.Id == id) ?? new EmptyLicense();
         }
 
-        public Task Store(License license)
+        public async Task<IEnumerable<License>> GetAll(int size, int page)
         {
-            throw new NotImplementedException();
+            IQueryable<License> licenses = this.context.Licenses
+                .OrderBy(x => x.Id)
+                .Skip(page)
+                .Take(size);
+
+            return await licenses.AsNoTracking().ToListAsync();
         }
+
+        public async Task Store(params License[] license)
+        {
+            foreach(var lic in license)
+            {
+                this.context.Add(lic);
+            }
+            await this.context.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
+        {
+            var license = await this.Get(id);
+            if (license is EmptyLicense) 
+                return;
+            this.context.Remove(license);
+            await this.context.SaveChangesAsync();
+        }
+
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposedValue)
             {
                 if (disposing)
                 {
                     this.context.Dispose();
                 }
+                disposedValue = true;
             }
-            this.disposed = true;
         }
+
+        ~LicenseDBService()
+        {
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: false);
+        }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

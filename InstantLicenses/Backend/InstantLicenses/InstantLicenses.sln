@@ -4,16 +4,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantLicenses.Web.API.Test", "InstantLicenses.Web.API.Test\InstantLicenses.Web.API.Test.csproj", "{91692FF4-0031-4D24-9295-C10B546ECDB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF} = {3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantLicenses.Web.API", "InstantLicenses.Web.API\InstantLicenses.Web.API.csproj", "{53D2C491-9EE4-41C0-83AF-5F0B6EB2F42B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantLicenses.Core", "InstantLicenses.Core\InstantLicenses.Core.csproj", "{138C5DE9-6D4C-493E-AB07-99A9AE0867AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantLicenses.Core", "InstantLicenses.Core\InstantLicenses.Core.csproj", "{138C5DE9-6D4C-493E-AB07-99A9AE0867AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantLicenses.Business", "InstantLicenses.Business\InstantLicenses.Business.csproj", "{EE51EEA7-E564-49EA-8EDE-68B7F0829608}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantLicenses.Business", "InstantLicenses.Business\InstantLicenses.Business.csproj", "{EE51EEA7-E564-49EA-8EDE-68B7F0829608}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantLicenses.Business.Test", "InstantLicenses.Business.Test\InstantLicenses.Business.Test.csproj", "{73E5AB96-D5F0-45D7-9B48-DC1E9BD64FB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantLicenses.Business.Test", "InstantLicenses.Business.Test\InstantLicenses.Business.Test.csproj", "{73E5AB96-D5F0-45D7-9B48-DC1E9BD64FB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantLicenses.DataLayer", "InstantLicenses.DataLayer\InstantLicenses.DataLayer.csproj", "{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InstantLicenses.DataLayer", "InstantLicenses.DataLayer\InstantLicenses.DataLayer.csproj", "{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConsole", "ClientConsole\ClientConsole.csproj", "{5AE83FB4-4F9C-47A3-9A20-927C880BE8A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +50,10 @@ Global
 		{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AE83FB4-4F9C-47A3-9A20-927C880BE8A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AE83FB4-4F9C-47A3-9A20-927C880BE8A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AE83FB4-4F9C-47A3-9A20-927C880BE8A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AE83FB4-4F9C-47A3-9A20-927C880BE8A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

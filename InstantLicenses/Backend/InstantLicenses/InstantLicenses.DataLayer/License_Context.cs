@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InstantLicenses.DataLayer
 {
-    internal class LicenseContext : DbContext
+    public class License_Context : DbContext
     {
         public DbSet<License> Licenses { get; set; }
         public DbSet<LicenseRent> Rents { get; set; }
         public string DbPath { get; }
 
-        public LicenseContext()
+        public License_Context()
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder);

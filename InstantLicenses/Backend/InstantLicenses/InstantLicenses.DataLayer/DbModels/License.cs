@@ -1,9 +1,19 @@
 ﻿namespace InstantLicenses.DataLayer.DbModels
 {
-    internal class License
+    public class License
     {
-        public int LicenseId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public List<LicenseRent> Rents { get; set; }
+    }
+
+    public sealed class EmptyLicense : License
+    {
+        public EmptyLicense() 
+        {
+            Id = 0;
+            Name = string.Empty;
+            Rents = new List<LicenseRent>();
+        }
     }
 }
