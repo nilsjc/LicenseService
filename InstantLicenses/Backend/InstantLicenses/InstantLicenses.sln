@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantLicenses.Business", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantLicenses.Business.Test", "InstantLicenses.Business.Test\InstantLicenses.Business.Test.csproj", "{73E5AB96-D5F0-45D7-9B48-DC1E9BD64FB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstantLicenses.DataLayer", "InstantLicenses.DataLayer\InstantLicenses.DataLayer.csproj", "{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{73E5AB96-D5F0-45D7-9B48-DC1E9BD64FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73E5AB96-D5F0-45D7-9B48-DC1E9BD64FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73E5AB96-D5F0-45D7-9B48-DC1E9BD64FB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB14C5A-B486-41BB-8BB2-5B2AD48725EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
