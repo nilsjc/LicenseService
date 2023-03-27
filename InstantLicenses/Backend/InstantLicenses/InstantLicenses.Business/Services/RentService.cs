@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InstantLicenses.Business.Command
+namespace InstantLicenses.Business.Services
 {
     public class CustomerRentLicense : ICustomerRentLicense
     {
-        private readonly IGetLicenseFromDB getLicenseFromDB;
-        public CustomerRentLicense(IGetLicenseFromDB getLicenseFromDB)
+        private readonly ILicenseDBService getLicenseFromDB;
+        public CustomerRentLicense(ILicenseDBService getLicenseFromDB)
         {
             this.getLicenseFromDB = getLicenseFromDB;
         }

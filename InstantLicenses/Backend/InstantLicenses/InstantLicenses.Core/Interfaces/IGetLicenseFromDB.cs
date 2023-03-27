@@ -1,10 +1,15 @@
-﻿namespace InstantLicenses.Core.Interfaces
+﻿using InstantLicenses.Core.Models;
+using System.Runtime.CompilerServices;
+
+namespace InstantLicenses.Core.Interfaces
 {
     /// <summary>
     /// Connection to DB. Internal use only.
     /// </summary>
-    public interface IGetLicenseFromDB
+    public interface ILicenseDBService
     {
-        string Get(string id);
+        Task<License> Get(string id);
+        Task Store(License license);
+        Task<IEnumerable<License>> GetAll(int size, int page);
     }
 }
