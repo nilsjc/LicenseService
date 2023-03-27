@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InstantLicenses.Core\InstantLicenses.Core.csproj" />
+    <ProjectReference Include="..\InstantLicenses.DataLayer\InstantLicenses.DataLayer.csproj" />
   </ItemGroup>
 
 </Project>
