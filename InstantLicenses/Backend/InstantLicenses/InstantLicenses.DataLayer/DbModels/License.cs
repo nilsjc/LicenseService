@@ -4,16 +4,17 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<LicenseRent> Rents { get; set; }
+        public DateTime? RentedAt { get; set; }
+        public string? ClientRent { get; set; }
     }
 
     public sealed class EmptyLicense : License
     {
         public EmptyLicense() 
         {
-            Id = 0;
             Name = string.Empty;
-            Rents = new List<LicenseRent>();
+            RentedAt = DateTime.MinValue;
+            ClientRent = string.Empty;
         }
     }
 }

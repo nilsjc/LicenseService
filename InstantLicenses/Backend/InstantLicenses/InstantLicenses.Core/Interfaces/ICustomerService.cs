@@ -1,7 +1,6 @@
-﻿using InstantLicenses.Web.API.DTOs;
-
-namespace InstantLicenses.Business.Interfaces
+﻿namespace InstantLicenses.Business.Interfaces
 {
+    using InstantLicenses.Core.DTOs;
     /// <summary>
     /// For renting a single license
     /// </summary>
@@ -12,9 +11,6 @@ namespace InstantLicenses.Business.Interfaces
         /// </summary>
         /// <param name="id">Id of license</param>
         /// <returns></returns>
-        Task<LicenseDTO> RentLicenseAsync(string id);
-        Task<int> CheckFreeLicenseAsync();
-        Task<Boolean> AddClientAsync(int licenseId, string user);
-
+        Task<CustomerLicenseDTO> RentLicenseAsync(string customerUser);
     }
 }

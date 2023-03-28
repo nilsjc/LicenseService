@@ -1,4 +1,5 @@
 ﻿using InstantLicenses.Business.Interfaces;
+using InstantLicenses.Core.DTOs;
 using InstantLicenses.Core.Interfaces;
 using InstantLicenses.DataLayer.DbModels;
 using InstantLicenses.Web.API.DTOs;
@@ -7,25 +8,16 @@ namespace InstantLicenses.Business.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ILicenseDBService<License> getLicenseFromDB;
-        public CustomerService(ILicenseDBService<License> getLicenseFromDB)
+        private readonly ILicenseDBService<License> licenseDBService;
+        public CustomerService(ILicenseDBService<License> licenseDBService)
         {
-            this.getLicenseFromDB = getLicenseFromDB;
+            this.licenseDBService = licenseDBService;
         }
-
-        public Task<bool> AddClientAsync(int licenseId, string user)
+        public async Task<CustomerLicenseDTO> RentLicenseAsync(string customerName)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> CheckFreeLicenseAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<LicenseDTO> RentLicenseAsync(string id)
-        {
-            throw new NotImplementedException();
+            var license = await this.licenseDBService.RentLicense(customerName);
+            
+            return new CustomerLicenseDTO { Name = license.Item1, Status = license.Item2 };
         }
     }
 }

@@ -52,7 +52,7 @@
             //    .Take(4);
 
             IQueryable<License> licenses = db.Licenses
-                .OrderBy(x => x.Id)
+                .OrderBy(x => x.Name)
                 .Skip(3)
                 .Take(4);
 

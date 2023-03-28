@@ -1,15 +1,20 @@
+using InstantLicenses.Business.Interfaces;
+using InstantLicenses.Business.Services;
+using InstantLicenses.Core.Interfaces;
+using InstantLicenses.DataLayer.DbModels;
+using InstantLicenses.DataLayer.Services;
+using Microsoft.Extensions.Options;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddMemoryCache();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<ILicenseDBService<License>, LicenseDBService>();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
