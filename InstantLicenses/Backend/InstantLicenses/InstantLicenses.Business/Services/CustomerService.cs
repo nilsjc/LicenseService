@@ -1,11 +1,9 @@
-﻿using InstantLicenses.Business.Interfaces;
-using InstantLicenses.Core.DTOs;
-using InstantLicenses.Core.Interfaces;
-using InstantLicenses.DataLayer.DbModels;
-using InstantLicenses.Web.API.DTOs;
-
-namespace InstantLicenses.Business.Services
+﻿namespace InstantLicenses.Business.Services
 {
+    using InstantLicenses.Business.Interfaces;
+    using InstantLicenses.Core.DTOs;
+    using InstantLicenses.Core.Interfaces;
+    using InstantLicenses.DataLayer.DbModels;
     public class CustomerService : ICustomerService
     {
         private readonly ILicenseDBService<License> licenseDBService;

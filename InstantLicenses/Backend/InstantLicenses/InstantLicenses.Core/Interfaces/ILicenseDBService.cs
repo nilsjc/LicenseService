@@ -1,4 +1,5 @@
 ﻿using InstantLicenses.Core.Models;
+using InstantLicenses.Web.API.DTOs;
 
 namespace InstantLicenses.Core.Interfaces
 {
@@ -7,9 +8,8 @@ namespace InstantLicenses.Core.Interfaces
     /// </summary>
     public interface ILicenseDBService<T> where T : class
     {
-        Task<T> Get(string name);
         Task<EntityStatus> Store(string licenseName);
-        Task<IEnumerable<T>> GetAll(int page, int size);
+        Task<IEnumerable<LicenseDTO>> GetAll(int page, int size);
         Task Delete(string name);
         Task<(string, EntityStatus)> RentLicense(string customerName);
     }

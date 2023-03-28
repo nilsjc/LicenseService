@@ -1,6 +1,7 @@
 ﻿using InstantLicenses.Core.Interfaces;
 using InstantLicenses.Core.Models;
 using InstantLicenses.DataLayer.DbModels;
+using InstantLicenses.Web.API.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace InstantLicenses.DataLayer.Services
@@ -15,23 +16,6 @@ namespace InstantLicenses.DataLayer.Services
         {
             context = new License_Context();
         }
-
-        public async Task<License> Get(string name)
-        {
-            return await context.Licenses
-                .FirstOrDefaultAsync(x => x.Name == name) ?? new EmptyLicense();
-        }
-
-        public async Task<IEnumerable<License>> GetAll(int page, int size)
-        {
-            IQueryable<License> licenses = this.context.Licenses
-                .OrderBy(x => x.Name)
-                .Skip(page)
-                .Take(size);
-
-            return await licenses.AsNoTracking().ToListAsync();
-        }
-
         public async Task<(string, EntityStatus)> RentLicense(string customerName)
         {
             var now = DateTime.UtcNow;
@@ -61,7 +45,7 @@ namespace InstantLicenses.DataLayer.Services
         {
             try
             {
-                var existingLicense = await this.Get(licenseName);
+                var existingLicense = await this.GetFromDB(licenseName);
                 if (existingLicense is EmptyLicense)
                 {
                     this.context.Add(
@@ -86,11 +70,43 @@ namespace InstantLicenses.DataLayer.Services
 
         public async Task Delete(string name)
         {
-            var license = await this.Get(name);
+            var license = await this.GetFromDB(name);
             if (license is EmptyLicense) 
                 return;
             this.context.Remove(license);
             await this.context.SaveChangesAsync();
+        }
+        public async Task<LicenseDTO> Get(string name)
+        {
+            var result = await this.GetFromDB(name);
+            return new LicenseDTO
+            {
+                Name = result.Name,
+                RentedAt = DateTime.UtcNow,
+                RentCustomer = result.ClientRent
+            };
+        }
+
+        public async Task<IEnumerable<LicenseDTO>> GetAll(int page, int size)
+        {
+            var result = await GetAllFromDB(page, size);
+            return ToDTOList(result);
+
+        }
+        private async Task<License> GetFromDB(string name)
+        {
+            return await context.Licenses
+                .FirstOrDefaultAsync(x => x.Name == name) ?? new EmptyLicense();
+        }
+
+        private async Task<IEnumerable<License>> GetAllFromDB(int page, int size)
+        {
+            IQueryable<License> licenses = this.context.Licenses
+                .OrderBy(x => x.Name)
+                .Skip(page)
+                .Take(size);
+
+            return await licenses.AsNoTracking().ToListAsync();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -116,6 +132,21 @@ namespace InstantLicenses.DataLayer.Services
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
+        }
+        public static List<LicenseDTO> ToDTOList(IEnumerable<License>? license)
+        {
+            if (license is null)
+                return new List<LicenseDTO>();
+
+            return license
+                .Select(x => new LicenseDTO
+                {
+                    Name = x.Name,
+                    RentedAt = x.RentedAt,
+                    Id = x.Id,
+                    RentCustomer = x.ClientRent
+                })
+                .ToList();
         }
     }
 }

@@ -1,9 +1,5 @@
 ﻿using InstantLicenses.Business.Interfaces;
-using InstantLicenses.Core.DTOs;
-using InstantLicenses.Web.API.DTOs;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace InstantLicenses.Web.API.Controllers
 {
