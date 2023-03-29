@@ -28,9 +28,9 @@ namespace InstantLicenses.Web.API.Controllers
 
         
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] string value)
+        public async Task<IActionResult> Post(string licenseName)
         {
-            var result = await this.adminService.PostLicense(value);
+            var result = await this.adminService.PostLicense(licenseName);
             if (result == Core.Models.EntityStatus.LicenseCreated)
             {
                 return Ok();
