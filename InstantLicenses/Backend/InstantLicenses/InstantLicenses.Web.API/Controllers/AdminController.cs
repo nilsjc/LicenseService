@@ -1,5 +1,6 @@
 ﻿using InstantLicenses.Core.Interfaces;
 using InstantLicenses.Web.API.DTOs;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 

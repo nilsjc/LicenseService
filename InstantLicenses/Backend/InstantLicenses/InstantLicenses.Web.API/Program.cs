@@ -4,8 +4,16 @@ using InstantLicenses.Core.Interfaces;
 using InstantLicenses.DataLayer.DbModels;
 using InstantLicenses.DataLayer.Services;
 using Microsoft.Extensions.Options;
-
+var allowedsite = "_allowedsite";
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: allowedsite,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000");
+        });
+});
 builder.Services.AddControllers();
 builder.Services.AddMemoryCache();
 builder.Services.AddEndpointsApiExplorer();
@@ -20,6 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(allowedsite);
 
 app.UseHttpsRedirection();
 

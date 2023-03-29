@@ -14,6 +14,29 @@
         public async Task<IEnumerable<LicenseDTO>> ShowLicenses(int page, int size)
         {
             var licenses = await licenseDBService.GetAll(page, size);
+            var now = DateTime.Now;
+            licenses.ToList().ForEach(license =>
+            {
+                if (license.RentedAt != null)
+                {
+                    var timeLeft = Math.Round((now - license.RentedAt).TotalSeconds, 0);
+                    if(timeLeft < 0 || timeLeft > 15)
+                    {
+                        license.TimeLeft = 0;
+                    }
+                    else
+                    {
+
+                        license.TimeLeft = 15 - timeLeft;
+                    }
+
+                }
+                else
+                {
+                    license.TimeLeft = 0;
+                }
+            }); 
+                
             return licenses;
         }
 

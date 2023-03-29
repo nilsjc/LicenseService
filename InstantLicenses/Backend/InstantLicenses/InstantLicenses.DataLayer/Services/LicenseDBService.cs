@@ -18,7 +18,7 @@ namespace InstantLicenses.DataLayer.Services
         }
         public async Task<(string, EntityStatus)> RentLicense(string customerName)
         {
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
 
             var activeLicenses = await this.context.Licenses
                 .Where(x => x.ClientRent == customerName)
@@ -36,7 +36,7 @@ namespace InstantLicenses.DataLayer.Services
                 return (string.Empty, EntityStatus.LicenseNotFound);
 
             license.ClientRent = customerName;
-            license.RentedAt = DateTime.UtcNow;
+            license.RentedAt = DateTime.Now;
             await this.context.SaveChangesAsync();
             return (license.Name, EntityStatus.LicenseRented);
         }
@@ -138,11 +138,13 @@ namespace InstantLicenses.DataLayer.Services
             if (license is null)
                 return new List<LicenseDTO>();
 
+            
+
             return license
                 .Select(x => new LicenseDTO
                 {
                     Name = x.Name,
-                    RentedAt = x.RentedAt,
+                    RentedAt = (DateTime)x.RentedAt,
                     Id = x.Id,
                     RentCustomer = x.ClientRent
                 })

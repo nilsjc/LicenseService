@@ -18,11 +18,11 @@ namespace InstantLicenses.Web.API.Controllers
             var result = await this.customerService.RentLicenseAsync(client);
             if(result.Status == Core.Models.EntityStatus.LicenseRented)
             {
-                return new OkObjectResult($"You got license {result.Name}.");
+                return new JsonResult(result);
             }
             else if(result.Status == Core.Models.EntityStatus.CustomerAlreadyRenting)
             {
-                return new OkObjectResult($"You are already renting {result.Name}");
+                return new JsonResult(result);
             }
             return BadRequest();
         }

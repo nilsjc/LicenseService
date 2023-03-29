@@ -18,7 +18,7 @@ namespace InstantLicenses.Web.API.DTOs
         /// <summary>
         /// Time latest rent
         /// </summary>
-        public DateTime? RentedAt { get; set; }
+        public DateTime RentedAt { get; set; }
         /// <summary>
         /// Status for API communication
         /// </summary>
@@ -27,5 +27,9 @@ namespace InstantLicenses.Web.API.DTOs
         /// Name of latest customer
         /// </summary>
         public string? RentCustomer { get; set; }
+        /// <summary>
+        /// Time left of rent (zero if not rented)
+        /// </summary>
+        public double TimeLeft { get; set; } = 0;
     }
 }
