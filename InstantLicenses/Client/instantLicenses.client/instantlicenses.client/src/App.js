@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import FetchLicense from './fetchlicense.js'
 import EnterAdminMode from './admin.js'
-
+import PushLicense from './pushlicense.js'
 function App() {
   return (
     <div className="App">
@@ -13,8 +13,8 @@ function App() {
         <p>
           License Generator
         </p>
-        <a>
-<button>Admin</button>
+              <a>
+                  <PushLicense />
               </a>
               <EnterAdminMode />
       </header>
