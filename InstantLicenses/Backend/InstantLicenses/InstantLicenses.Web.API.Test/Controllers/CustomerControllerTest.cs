@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using InstantLicenses.Business.Interfaces;
 using Moq;
 using InstantLicenses.Core.DTOs;
+using System.Text.Json;
 
 namespace InstantLicenses.Web.API.Test.Controllers
 {
@@ -17,12 +18,13 @@ namespace InstantLicenses.Web.API.Test.Controllers
         [Fact]
         public async Task TestController()
         {
+            const string FakeLicenseName = "abc123";
             // Arrange
             const string FakeCustomerUser = "nils";
             CustomerLicenseDTO fakeDTO = new CustomerLicenseDTO
             {
-                Name = "abc123",
-                Status = Core.Models.EntityStatus.LicenseCreated
+                Name = FakeLicenseName,
+                Status = Core.Models.EntityStatus.LicenseRented
             };
             var customerServiceMock = new Mock<ICustomerService>();
             customerServiceMock.Setup(x => x.RentLicenseAsync(FakeCustomerUser))
@@ -30,10 +32,12 @@ namespace InstantLicenses.Web.API.Test.Controllers
             CustomerController controller = new CustomerController(customerServiceMock.Object);
 
             // Act
-            var result = await controller.Get(FakeCustomerUser) as JsonResult;
+            var jsonResult = await controller.Get(FakeCustomerUser) as JsonResult;
+            var result = (CustomerLicenseDTO)jsonResult.Value;
 
             // Assert
-
+            Assert.Equal(FakeLicenseName, result.Name);
+            Assert.Equal(Core.Models.EntityStatus.LicenseRented, result.Status);
         }
     }
 }
